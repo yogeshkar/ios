@@ -1,0 +1,110 @@
+//
+//  ViewController.swift
+//  ykp
+//
+//  Created by Student on 16/09/19.
+//  Copyright © 2019 Student. All rights reserved.
+//
+
+import UIKit
+
+class ViewController: UIViewController,UITextFieldDelegate {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        output.isHidden = true
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @IBOutlet var chng: UIButton!
+    @IBOutlet var phone: UITextField!
+    @IBOutlet var name: UITextField!
+    @IBOutlet var output: UILabel!
+    @IBOutlet var swt: UISwitch!
+    @IBOutlet var sld: UISlider!
+    @IBOutlet var sldlbl: UILabel!
+    @IBOutlet var sgmnt: UISegmentedControl!
+    @IBAction func seg(_ sender: Any) {
+        if(sgmnt.selectedSegmentIndex==0)
+        {}
+        else
+        {}
+    }
+  
+    @IBAction func sldr(_ sender: Any) {
+        sldlbl.text=String(Int(sld.value))
+    }
+    @IBAction func swtch(_ sender: Any) {
+        if(swt.isOn == true)
+        {}
+        else
+        {}
+    }
+    @IBAction func submit(_ sender: Any) {
+        if(name.hasText == false || phone.hasText  == false || sgmnt.selectedSegmentIndex == -1)
+        {
+            var alrt = UIAlertController(title: "Warninig...", message: "Empty Feilds.", preferredStyle: UIAlertControllerStyle.alert)
+            alrt.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.default, handler: nil))
+            present(alrt, animated: true, completion:nil)
+        
+        }
+        else if(phone.text?.count != 10)
+        {
+            var alrt = UIAlertController(title: "Warninig...", message: "phone number should be of 10 digits", preferredStyle: UIAlertControllerStyle.alert)
+            alrt.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.default, handler: nil))
+            present(alrt, animated: true, completion:nil)
+        }
+        else{
+        
+        output.isHidden = false
+        
+        if(sgmnt.selectedSegmentIndex==1 && swt.isOn == false)
+        {
+            output.text="You can persue next course"
+        }
+        else if(sgmnt.selectedSegmentIndex==0 && swt.isOn==false)
+        {
+            output.text="You can persue next course with a job"
+        }
+        else if(swt.isOn == true)
+        {
+            output.text = "You can persue a job and you can go for higher studies"
+        }
+        }
+    }
+    
+    @IBOutlet var img: UIImageView!
+    @IBAction func change(_ sender: Any) {
+        var action = {
+            (obj: UIAlertAction)->Void in
+            self.img.image = UIImage(named: "img1")
+        }
+        var action2 = {
+            (obj: UIAlertAction)->Void in
+            self.img.image = UIImage(named: "img2")
+        }
+        var action3 = {
+            (obj: UIAlertAction)->Void in
+            self.img.image = UIImage(named: "img3")
+        }
+        var alt = UIAlertController(title: "Warninig...", message: "Empty Fiels.", preferredStyle: UIAlertControllerStyle.alert)
+        alt.addAction(UIAlertAction(title: "Scene..1", style:UIAlertActionStyle.default, handler: action2))
+       alt.addAction(UIAlertAction(title: "scene 2", style: UIAlertActionStyle.default, handler: action))
+       alt.addAction(UIAlertAction(title: "scene 3", style: UIAlertActionStyle.default, handler: action3))
+      present(alt, animated: true, completion:nil)    }
+}
+
+
+
